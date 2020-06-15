@@ -12,18 +12,16 @@
   <div id="content">
     <section>
       <div class="section-header">
-        <h2><span class="	fa fa-map-marker"></span> Data Outlet</h2>
+        <h2><span class="	fa fa-map-marker"></span> Data Wewenang Menu</h2>
       </div>
       <?= $this->session->flashdata('msg'); ?>
 
     <!-- BEGIN TABLE HOVER -->
     <section class="style-default-bright" style="margin-top:0px;">
       <p><a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modal_add_outlet"><span
-            class="fa fa-plus"></span> Tambah Outlet</a></p>
+            class="fa fa-plus"></span> Tambah Wewenang</a></p>
       <div class="section-body">
         <div class="row">
-            <form class="form-horizontal" role="form" method="post" action="<?= base_url('admin/parameter/simpan_outlet'); ?>"
-            enctype="multipart/form-data">
             <table class="table table-hover" id="datatable1">
                 <thead>
                 <tr>
@@ -44,82 +42,52 @@
                 $no = 0;
                 foreach ($data->result_array() as $table_content) {
                     $no++ ?>
-                <div class="form-group">
                     <tr>
-                        <td><?= $no; ?></td>
-                        <td><?= $table_content['level_desc']; ?></td>
-                        <td>
-                            <div class="checkbox checkbox-styled">
+                        <form name="form" method="post" action="<?= base_url().'admin/parameter/reset_wewenang/'.$table_content['level_id'];?>">
+                            <td><?= $no; ?></td>
+                            <td><?= $table_content['level_desc']; ?></td>
+                            <td>
                                 <?php if ($table_content['parameter'] == 'Y') : ?>
-                                    <input type="checkbox" value="Y" checked>
-                                <?php else : ?>
-                                    <input type="checkbox" value="Y">
-                                <?php endif; ?>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="checkbox checkbox-styled">
+                                <?php $check = "checked"; else : $check = ""; endif;?>
+                                <input type="checkbox" name="wewenang[]" value="1" <?= $check?>>
+                            </td>
+                            <td>
                                 <?php if ($table_content['katalog'] == 'Y') : ?>
-                                    <input type="checkbox" value="Y" checked>
-                                <?php else : ?>
-                                    <input type="checkbox" value="Y">
-                                <?php endif; ?>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="checkbox checkbox-styled">
+                                <?php $check = "checked"; else : $check = ""; endif;?>
+                                <input type="checkbox" name="wewenang[]" value="2" <?= $check?>>
+                            </td>
+                            <td>
                                 <?php if ($table_content['pos'] == 'Y') : ?>
-                                    <input type="checkbox" value="Y" checked>
-                                <?php else : ?>
-                                    <input type="checkbox" value="Y">
-                                <?php endif; ?>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="checkbox checkbox-styled">
+                                <?php $check = "checked"; else : $check = ""; endif;?>
+                                <input type="checkbox" name="wewenang[]" value="3" <?= $check?>>
+                            </td>
+                            <td>
                                 <?php if ($table_content['laporan'] == 'Y') : ?>
-                                    <input type="checkbox" value="Y" checked>
-                                <?php else : ?>
-                                    <input type="checkbox" value="Y">
-                                <?php endif; ?>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="checkbox checkbox-styled">
+                                <?php $check = "checked"; else : $check = ""; endif;?>
+                                <input type="checkbox" name="wewenang[]" value="4" <?= $check?>>
+                            </td>
+                            <td>
                                 <?php if ($table_content['sistem'] == 'Y') : ?>
-                                    <input type="checkbox" value="Y" checked>
-                                <?php else : ?>
-                                    <input type="checkbox" value="Y">
-                                <?php endif; ?>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="checkbox checkbox-styled">
+                                <?php $check = "checked"; else : $check = ""; endif;?>
+                                <input type="checkbox" name="wewenang[]" value="5" <?= $check?>>
+                            </td>
+                            <td>
                                 <?php if ($table_content['import_data'] == 'Y') : ?>
-                                    <input type="checkbox" value="Y" checked>
-                                <?php else : ?>
-                                    <input type="checkbox" value="Y">
-                                <?php endif; ?>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="checkbox checkbox-styled">
+                                <?php $check = "checked"; else : $check = ""; endif;?>
+                                <input type="checkbox" name="wewenang[]" value="6" <?= $check?>>
+                            </td>
+                            <td>
                                 <?php if ($table_content['user'] == 'Y') : ?>
-                                    <input type="checkbox" value="Y" checked>
-                                <?php else : ?>
-                                    <input type="checkbox" value="Y">
-                                <?php endif; ?>
-                            </div>
-                        </td>
-                        <td class="text-right">
-                        <a href="#" class="btn btn-icon-toggle" title="Edit row" data-toggle="modal"
-                            data-target="#modal_edit_outlet<?= $table_content['level_id']; ?>"><i class="fa fa-pencil"></i></a>
-                        <a href="#" class="btn btn-icon-toggle" title="Delete row" data-toggle="modal"
-                            data-target="#modal_hapus_outlet<?= $table_content['level_id']; ?>"><i
-                            class="fa fa-trash-o text-danger"></i></a>
-                        </td>
+                                <?php $check = "checked"; else : $check = ""; endif;?>
+                                <input type="checkbox" name="wewenang[]" value="7" <?= $check?>>
+                            </td>
+                            <td class="text-right">
+                                <button type="submit" name="submit-form" class="btn btn-icon-toggle" title="Update Permission">
+                                <i class='fa fa-refresh'></i>
+                                </button>
+                            </td>
+                        </form>
                     </tr>
-                </div>
                 <?php } ?>
                 </tbody>
             </table>

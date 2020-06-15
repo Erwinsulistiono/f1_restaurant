@@ -32,7 +32,7 @@ class Parameter extends MY_Controller
       'pt_email' => $this->input->post('pt_email'),
       'pt_website' => $this->input->post('pt_website'),
     ];
-    $this->m_crud->update( 'tbl_pt', $data, 'pt_id', $this->input->post('pt_id'));
+    $this->m_crud->update('tbl_pt', $data, 'pt_id', $this->input->post('pt_id'));
     $this->session->set_flashdata('msg', '<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button><b>' . $data['pt_nama'] . '</b> Berhasil diupdate.</div>');
     redirect('admin/parameter/profile_company');
   }
@@ -46,32 +46,56 @@ class Parameter extends MY_Controller
     $this->render('admin/v_parameter_wewenang', $data);
   }
 
-  function simpan_wewenang()
+  function reset_wewenang()
   {
-    $data =  [
-      'out_kode' => $this->input->post('out_kode'),
-      'out_nama' => $this->input->post('out_nama'),
-      'out_alamat' => $this->input->post('out_alamat'),
-      'out_telp' => $this->input->post('out_telp'),
-      'out_email' => $this->input->post('out_email'),
-      'out_nm_pic' => $this->input->post('out_nm_pic'),
-      'area_id' => $this->input->post('area_id'),
-    ];
+    if ($this->input->post('wewenang')) {
+      // $allSelectedMenu = implode(',' , );
+      if (array_search('1', $_POST['wewenang']) !== FALSE) {
+        $parameter = "Y";
+      }
+      if (array_search('2', $_POST['wewenang']) !== FALSE) {
+        $katalog = "Y";
+      }
+      if (array_search('3', $_POST['wewenang']) !== FALSE) {
+        $pos = "Y";
+      }
+      if (array_search('4', $_POST['wewenang']) !== FALSE) {
+        $laporan = "Y";
+      }
+      if (array_search('5', $_POST['wewenang']) !== FALSE) {
+        $sistem = "Y";
+      }
+      if (array_search('6', $_POST['wewenang']) !== FALSE) {
+        $import = "Y";
+      }
+      if (array_search('7', $_POST['wewenang']) !== FALSE) {
+        $user = "Y";
+      }
+      $id = $this->uri->segment(4);
+      $data = [
+        'parameter' => $parameter,
+        'katalog' => $katalog,
+        'pos' => $pos,
+        'laporan' => $laporan,
+        'sistem' => $sistem,
+        'import_data' => $import,
+        'user' => $user,
+      ];
 
-    if (!$this->input->post('out_id')) {
-      $this->m_crud->insert('tbl_outlet', $data);
-    }   
-    $this->m_crud->update('tbl_outlet', $data, 'out_id', $this->input->post('out_id'));
-    $this->session->set_flashdata('msg', '<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button><b>' . $data['out_nama'] . '</b> Berhasil ditambah/diupdate.</div>');
-    redirect('admin/parameter/outlet');
+      $this->m_crud->update('tbl_level', $data, 'level_id', $id);
+      $this->session->set_flashdata('msg', '<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button><b> wewenang berhasil di update </div>');
+    } else {
+      $this->session->set_flashdata('msg', '<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button><b></b> Tidak ada data di pass</div>');
+    }
+    redirect('admin/parameter/wewenang');
   }
 
   function hapus_wewenang()
-	{
-		$this->m_crud->delete('tbl_outlet', 'out_id', $this->input->post('out_id'));
-		$this->session->set_flashdata('msg','<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button>Outlet <b>'.$this->input->post('out_nama').'</b> Berhasil dihapus dari database.</div>');
-		redirect('admin/parameter/outlet');
-	}
+  {
+    $this->m_crud->delete('tbl_outlet', 'out_id', $this->input->post('out_id'));
+    $this->session->set_flashdata('msg', '<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button>Outlet <b>' . $this->input->post('out_nama') . '</b> Berhasil dihapus dari database.</div>');
+    redirect('admin/parameter/outlet');
+  }
 
 
 
@@ -97,18 +121,18 @@ class Parameter extends MY_Controller
 
     if (!$this->input->post('out_id')) {
       $this->m_crud->insert('tbl_outlet', $data);
-    }   
+    }
     $this->m_crud->update('tbl_outlet', $data, 'out_id', $this->input->post('out_id'));
     $this->session->set_flashdata('msg', '<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button><b>' . $data['out_nama'] . '</b> Berhasil ditambah/diupdate.</div>');
     redirect('admin/parameter/outlet');
   }
 
   function hapus_outlet()
-	{
-		$this->m_crud->delete('tbl_outlet', 'out_id', $this->input->post('out_id'));
-		$this->session->set_flashdata('msg','<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button>Outlet <b>'.$this->input->post('out_nama').'</b> Berhasil dihapus dari database.</div>');
-		redirect('admin/parameter/outlet');
-	}
+  {
+    $this->m_crud->delete('tbl_outlet', 'out_id', $this->input->post('out_id'));
+    $this->session->set_flashdata('msg', '<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button>Outlet <b>' . $this->input->post('out_nama') . '</b> Berhasil dihapus dari database.</div>');
+    redirect('admin/parameter/outlet');
+  }
 
   function pelanggan()
   {
@@ -137,19 +161,19 @@ class Parameter extends MY_Controller
     if (!$this->input->post('plg_id')) {
       $this->m_crud->insert('tbl_pelanggan', $data);
       redirect('admin/parameter/pelanggan');
-      $this->session->set_flashdata('msg', '<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button><b>' . $data['plg_nama'] . '</b> Berhasil ditambah/diupdate.</div>');  
-    } 
+      $this->session->set_flashdata('msg', '<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button><b>' . $data['plg_nama'] . '</b> Berhasil ditambah/diupdate.</div>');
+    }
     $this->m_crud->update('tbl_pelanggan', $data, 'plg_id', $this->input->post('plg_id'));
     redirect('admin/parameter/pelanggan');
-    $this->session->set_flashdata('msg', '<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button><b>' . $data['plg_nama'] . '</b> Berhasil ditambah/diupdate.</div>');  
+    $this->session->set_flashdata('msg', '<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button><b>' . $data['plg_nama'] . '</b> Berhasil ditambah/diupdate.</div>');
   }
 
   function hapus_pelanggan()
-	{
-		$this->m_crud->delete('tbl_pelanggan', 'plg_id', $this->input->post('plg_id'));
-		$this->session->set_flashdata('msg','<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button>Outlet <b>'.$this->input->post('out_nama').'</b> Berhasil dihapus dari database.</div>');
-		redirect('admin/parameter/pelanggan');
-	}
+  {
+    $this->m_crud->delete('tbl_pelanggan', 'plg_id', $this->input->post('plg_id'));
+    $this->session->set_flashdata('msg', '<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button>Outlet <b>' . $this->input->post('out_nama') . '</b> Berhasil dihapus dari database.</div>');
+    redirect('admin/parameter/pelanggan');
+  }
 
   function get_grafik_pelanggan()
   {
@@ -186,17 +210,48 @@ class Parameter extends MY_Controller
       $this->m_crud->insert('tbl_supplier', $data);
       $this->session->set_flashdata('msg', '<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button><b>' . $data['out_nama'] . '</b> Berhasil ditambah/diupdate.</div>');
       redirect('admin/parameter/supplier');
-    }  
+    }
     $this->m_crud->update('tbl_supplier', $data, 'supplier_id', $this->input->post('supplier_id'));
     $this->session->set_flashdata('msg', '<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button><b>' . $data['out_nama'] . '</b> Berhasil ditambah/diupdate.</div>');
     redirect('admin/parameter/supplier');
   }
 
   function hapus_supplier()
-	{
-		$this->m_crud->delete('tbl_supplier', 'supplier_id', $this->input->post('supplier_id'));
-		$this->session->set_flashdata('msg','<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button>Supplier <b>'.$this->input->post('out_nama').'</b> Berhasil dihapus dari database.</div>');
-		redirect('admin/parameter/supplier');
-	}
+  {
+    $this->m_crud->delete('tbl_supplier', 'supplier_id', $this->input->post('supplier_id'));
+    $this->session->set_flashdata('msg', '<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button>Supplier <b>' . $this->input->post('out_nama') . '</b> Berhasil dihapus dari database.</div>');
+    redirect('admin/parameter/supplier');
+  }
 
+  //tax
+  public function tax()
+  {
+    $data = [
+      'data' => $this->m_crud->read('tbl_tax'),
+    ];
+    $this->render('admin/v_parameter_tax', $data);
+  }
+
+  public function simpan_tax()
+  {
+    $data = [
+      'tax_nm' => $this->input->post('tax_nm'),
+      'tax_persen' => $this->input->post('tax_persen')
+    ];
+    if (!$this->input->post('tax_id')) {
+      $this->m_crud->insert('tbl_tax', $data);
+      $this->session->set_flashdata('msg', '<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button><b>' . $data['tax_nm'] . '</b> Berhasil ditambah/diupdate.</div>');
+      redirect('admin/parameter/tax');
+    }
+    $this->m_crud->update('tbl_tax', $data, 'tax_id', $this->input->post('tax_id'));
+    $this->session->set_flashdata('msg', '<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button><b>' . $data['tax_nm'] . '</b> Berhasil ditambah/diupdate.</div>');
+    redirect('admin/parameter/tax');
+  }
+
+  public function hapus_tax($tax_id)
+  {
+    $this->m_crud->delete('tbl_tax', 'tax_id', $tax_id);
+    $this->session->set_flashdata('msg', '<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button>Mater <b>' . $this->input->post('tax_nm') . '</b> Berhasil dihapus.</div>');
+    redirect('admin/parameter/tax');
+  }
 }

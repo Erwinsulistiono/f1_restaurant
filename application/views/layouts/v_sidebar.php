@@ -40,6 +40,9 @@
         <ul>
           <li><a href="<?= base_url('admin/parameter/pelanggan'); ?>"><span class="title">Pelanggan</span></a></li>
         </ul>
+        <ul>
+          <li><a href="<?= base_url('admin/parameter/tax'); ?>"><span class="title">Tax</span></a></li>
+        </ul>
         <!--end /submenu -->
       </li>
       <!--end /menu-li -->
@@ -55,16 +58,11 @@
           <li><a href="<?= base_url('admin/katalog/menu'); ?>"><span class="title">Menu</span></a></li>
         </ul>
         <ul>
-          <li><a href="<?= base_url('admin/katalog/kategori_menu'); ?>"><span class="title">Kategori Menu</span></a></li>
+          <li><a href="<?= base_url('admin/katalog/kategori_menu'); ?>"><span class="title">Kategori Menu</span></a>
+          </li>
         </ul>
         <ul>
           <li><a href="<?= base_url('admin/katalog/inventori'); ?>"><span class="title">Inventori</span></a></li>
-        </ul>
-        <ul>
-          <li><a href="<?= base_url() . '#' ?>"><span class="title">Paket Produk</span></a></li>
-        </ul>
-        <ul>
-          <li><a href="<?= base_url() . '#' ?>"><span class="title">Tipe Special</span></a></li>
         </ul>
         <ul>
           <li><a href="<?= base_url('admin/katalog/gallery'); ?>"><span class="title">Gallery</span></a></li>
@@ -103,7 +101,8 @@
             </a>
             <!--start submenu -->
             <ul>
-              <li><a href="#"><span class="title">Denah Restaurant</span></a></li>
+              <li><a href="<?= base_url('admin/restaurant/area'); ?>"><span class="title">Settings Area</span></a></li>
+              <li><a href="<?= base_url('admin/restaurant/meja'); ?>"><span class="title">Settings Meja</span></a></li>
               <li><a href="#"><span class="title">Settings Bill</span></a></li>
               <li><a href="#"><span class="title">Dapur</span></a></li>
               <li><a href="#"><span class="title">Waiters</span></a></li>
@@ -184,64 +183,6 @@
           <li><a href="<?= base_url() . 'admin/pengguna' ?>"><span class="title">User List</span></a></li>
         </ul>
       </li>
-
-
-
-
-      <!--default submenu bawaan mfood
-					<li>
-						<a href="<?= base_url() . 'admin/menu' ?>">
-							<div class="gui-icon"><i class="fa fa-cutlery"></i></div>
-							<span class="title">Menu</span>
-						</a>
-					</li>
-
-					<li>
-						<a href="<?= base_url() . 'admin/pelanggan' ?>">
-							<div class="gui-icon"><i class="fa fa-users"></i></div>
-							<span class="title">Pelanggan</span>
-						</a>
-					</li>
-
-					<li>
-						<a href="<?= base_url() . 'admin/order' ?>">
-							<div class="gui-icon"><i class="fa fa-cart-arrow-down"></i></div>
-							<span class="title">Order</span>
-						</a>
-					</li>
-
-					<li>
-						<a href="<?= base_url() . 'admin/rekening' ?>">
-							<div class="gui-icon"><i class="fa fa-credit-card"></i></div>
-							<span class="title">Rekening</span>
-						</a>
-					</li>
-
-					<li>
-						<a href="<?= base_url() . 'admin/konfirmasi' ?>">
-							<div class="gui-icon"><i class="fa fa-exchange"></i></div>
-							<span class="title">Konfirmasi</span>
-						</a>
-					</li>
-
-					<li>
-						<a href="<?= base_url() . 'admin/gallery' ?>">
-							<div class="gui-icon"><i class="fa fa-image"></i></div>
-							<span class="title">Gallery</span>
-						</a>
-					</li>
-          
-					<li class="gui-folder">
-						<a>
-							<div class="gui-icon"><i class="fa fa-cogs"></i></div>
-							<span class="title">Pengaturan</span>
-						</a>
-						<ul>
-							<li><a href="<?= base_url() . 'admin/status' ?>"><span class="title">Status Order</span></a></li>
-						</ul>
-					</li>
-					END DEFAULT MENU MFOOD -->
-
 
     </ul>
     <!--end .main-menu -->
